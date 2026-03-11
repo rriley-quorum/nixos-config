@@ -64,8 +64,8 @@
     # Java
     jdk21
 
-    # Elixir / Erlang (matched to Ubuntu asdf versions)
-    beam.packages.erlang_26.elixir_1_18
+    # Elixir / Erlang
+    beam26Packages.elixir_1_18
   ];
 
   #
