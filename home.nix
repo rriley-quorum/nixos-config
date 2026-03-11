@@ -27,8 +27,8 @@
     jira-cli
     direnv
 
-    # Node.js (v22 LTS — replaces nvm)
-    nodejs_22
+    # Node.js (v24 LTS — replaces nvm)
+    nodejs_24
 
     # npm global packages available in nixpkgs
     nodePackages.typescript
@@ -41,7 +41,7 @@
     #   npm install -g @githubnext/github-copilot-cli
 
     # Ruby (replaces rbenv; pin version explicitly here)
-    ruby_3_4
+    ruby_4_0
 
     # Python (uv for package management, asdf-managed python for projects)
     uv
