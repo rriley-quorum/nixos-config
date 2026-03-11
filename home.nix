@@ -69,7 +69,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "half-life";
-      plugins = [ "git" "node" "ruby" "zsh-syntax-highlighting" "zsh-autosuggestions" ];
+      plugins = [ "git" "node" "ruby" ];
     };
 
     shellAliases = {
@@ -78,7 +78,7 @@
     };
 
     envExtra = ''
-      . "$HOME/.cargo/env"
+      [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
     '';
 
     initContent = ''
