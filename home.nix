@@ -98,6 +98,8 @@
     vimAlias = true;
   };
 
+  xdg.configFile."nvim".source = ./nvim;
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
