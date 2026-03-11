@@ -24,7 +24,7 @@
     jira-cli
     direnv
 
-    nodejs_24
+    nodejs_22
     nodePackages.typescript
     nodePackages.typescript-language-server
     claude-code
@@ -45,7 +45,7 @@
 
     jdk21
 
-    beam26Packages.elixir_1_18
+    beam26Packages.elixir
   ];
 
   programs.git = {
