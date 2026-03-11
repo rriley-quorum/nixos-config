@@ -14,8 +14,15 @@
   users.users.ryanr = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" ];
   };
+
+  virtualisation.docker.enable = true;
+
+  system.activationScripts.dockerDesktopCompat = ''
+    mkdir -p /usr/bin
+    ln -sf /run/current-system/sw/bin/whoami /usr/bin/whoami
+  '';
 
   programs.zsh.enable = true;
 
