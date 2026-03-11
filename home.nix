@@ -27,6 +27,7 @@
     nodePackages.typescript
     nodePackages.typescript-language-server
     claude-code
+    github-copilot-cli
 
     ruby_4_0
 
