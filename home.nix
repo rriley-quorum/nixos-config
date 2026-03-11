@@ -27,8 +27,21 @@
     jira-cli
     direnv
 
-    # Node version manager (nvm installed via shell init; see zsh config below)
-    nvm
+    # Node.js (v22 LTS — replaces nvm)
+    nodejs_22
+
+    # npm global packages available in nixpkgs
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+
+    # Claude Code (available directly in nixpkgs)
+    claude-code
+
+    # copilot-cli is not in nixpkgs; install imperatively after setup:
+    #   npm install -g @githubnext/github-copilot-cli
+
+    # Ruby (replaces rbenv; pin version explicitly here)
+    ruby_3_4
 
     # Python (uv for package management, asdf-managed python for projects)
     uv
@@ -53,8 +66,6 @@
 
     # Elixir / Erlang (matched to Ubuntu asdf versions)
     beam.packages.erlang_26.elixir_1_18
-
-    # Claude Code and Copilot CLI are installed via npm after nvm/node setup
   ];
 
   #
@@ -82,7 +93,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "half-life";
-      plugins = [ "git" "zsh-syntax-highlighting" "zsh-autosuggestions" ];
+      plugins = [ "git" "node" "ruby" "zsh-syntax-highlighting" "zsh-autosuggestions" ];
     };
 
     shellAliases = {
@@ -95,11 +106,6 @@
     '';
 
     initExtra = ''
-      # nvm
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "${pkgs.nvm}/share/nvm/nvm.sh" ] && \. "${pkgs.nvm}/share/nvm/nvm.sh"
-      [ -s "${pkgs.nvm}/share/nvm/bash_completion" ] && \. "${pkgs.nvm}/share/nvm/bash_completion"
-
       # direnv
       eval "$(direnv hook zsh)"
 
