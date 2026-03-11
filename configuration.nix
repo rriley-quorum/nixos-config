@@ -3,12 +3,9 @@
   wsl = {
     enable = true;
     defaultUser = "ryanr";
-    nativeSystemd = true;
-    interop = {
-      enable = true;
-      includePath = false;
-    };
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

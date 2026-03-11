@@ -20,7 +20,7 @@
     m4
 
     gh
-    jira-cli
+    jira-cli-go
     direnv
 
     nodejs_22
@@ -52,9 +52,9 @@
 
   programs.git = {
     enable = true;
-    userName = "Ryan Riley";
-    userEmail = "ryan.riley@quorumsoftware.com";
-    extraConfig = {
+    settings = {
+      user.name = "Ryan Riley";
+      user.email = "ryan.riley@quorumsoftware.com";
       init.defaultBranch = "main";
       core.editor = "nvim";
     };
@@ -81,7 +81,7 @@
       . "$HOME/.cargo/env"
     '';
 
-    initExtra = ''
+    initContent = ''
       eval "$(direnv hook zsh)"
 
       export CPPFLAGS="$(pkg-config --cflags openssl 2>/dev/null) $CPPFLAGS"
@@ -105,11 +105,12 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    enableDefaultConfig = false;
     matchBlocks = {
       "github.com" = {
         user = "git";
         identityFile = "~/.ssh/id_ed25519";
+        extraOptions.AddKeysToAgent = "yes";
       };
     };
   };
