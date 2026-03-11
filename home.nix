@@ -2,7 +2,7 @@
 {
   home.username = "ryanr";
   home.homeDirectory = "/home/ryanr";
-  home.stateVersion = "24.05";
+  home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
     wget

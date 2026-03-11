@@ -2,10 +2,10 @@
   description = "NixOS WSL configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
+      url = "github:nix-community/NixOS-WSL/2511.7.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
