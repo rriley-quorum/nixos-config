@@ -6,13 +6,12 @@
     nativeSystemd = true;
     interop = {
       enable = true;
-      includePath = false; # keep Nix PATH clean from Windows PATH
+      includePath = false;
     };
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Allow ryanr to use sudo
   security.sudo.wheelNeedsPassword = false;
 
   users.users.ryanr = {
@@ -23,7 +22,6 @@
 
   programs.zsh.enable = true;
 
-  # Symlink .aws and .azure to Windows user profile (matches Ubuntu setup)
   system.activationScripts.windowsCredentials = ''
     WINDOWS_HOME="/mnt/c/Users/ryan.riley"
     USER_HOME="/home/ryanr"
