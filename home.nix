@@ -98,7 +98,10 @@
     vimAlias = true;
   };
 
-  xdg.configFile."nvim".source = ./nvim;
+  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
+  xdg.configFile."nvim/lua".source = ./nvim/lua;
+  xdg.configFile."nvim/lazyvim.json".source = ./nvim/lazyvim.json;
+  xdg.configFile."nvim/stylua.toml".source = ./nvim/stylua.toml;
 
   programs.direnv = {
     enable = true;
