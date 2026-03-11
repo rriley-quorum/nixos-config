@@ -4,6 +4,8 @@
   home.homeDirectory = "/home/ryanr";
   home.stateVersion = "25.11";
 
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
   home.packages = with pkgs; [
     wget
     dos2unix
