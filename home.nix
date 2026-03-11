@@ -8,7 +8,6 @@
     wget
     dos2unix
     fd
-    fzf
     ripgrep
     inotify-tools
     xclip
@@ -32,6 +31,7 @@
     ruby_4_0
 
     uv
+    python312
 
     rustup
 
@@ -86,6 +86,8 @@
       export LDFLAGS="$(pkg-config --libs openssl 2>/dev/null) $LDFLAGS"
     '';
   };
+
+  programs.fzf.enable = true;
 
   programs.neovim = {
     enable = true;
