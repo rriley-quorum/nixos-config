@@ -4,7 +4,7 @@
   home.homeDirectory = "/home/ryanr";
   home.stateVersion = "25.11";
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  home.sessionPath = [ "$HOME/.local/bin" "$HOME/.dotnet/tools" ];
 
   home.packages = with pkgs; [
     wget
@@ -45,6 +45,7 @@
     docker
 
     chromium
+    chromedriver
 
     dotnet-sdk_10
 

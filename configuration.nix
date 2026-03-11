@@ -24,6 +24,8 @@
     ln -sf /run/current-system/sw/bin/whoami /usr/bin/whoami
   '';
 
+  programs.nix-ld.enable = true;
+
   programs.zsh.enable = true;
 
   system.activationScripts.windowsCredentials = ''
