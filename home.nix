@@ -39,6 +39,8 @@
 
     luarocks
 
+    docker
+
     chromium
 
     dotnet-sdk_10
