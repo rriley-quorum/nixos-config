@@ -181,6 +181,11 @@ cp /mnt/c/Users/<windowsuser>/.ssh/id_ed25519 ~/.ssh/
 cp /mnt/c/Users/<windowsuser>/.ssh/id_ed25519.pub ~/.ssh/
 chmod 700 ~/.ssh && chmod 600 ~/.ssh/id_ed25519
 
-# 5. Set as default WSL distro (PowerShell)
+# 5. Enable Docker Desktop WSL integration (Windows)
+# Docker Desktop → Settings → Resources → WSL Integration
+# Toggle on the NixOS distro, click Apply & Restart
+# After restart, /var/run/docker.sock will be available in NixOS
+
+# 6. Set as default WSL distro (PowerShell)
 wsl --set-default NixOS
 ```
