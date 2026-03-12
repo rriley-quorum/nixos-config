@@ -88,6 +88,8 @@ in
     erlang-language-platform
     omnisharp-roslyn
     terraform-ls
+
+    postgresql
   ];
 
   programs.git = {
