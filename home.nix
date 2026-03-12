@@ -1,4 +1,20 @@
 { config, pkgs, ... }:
+let
+  acli = pkgs.stdenv.mkDerivation rec {
+    pname = "acli";
+    version = "latest";
+    src = pkgs.fetchurl {
+      url = "https://acli.atlassian.com/linux/latest/acli_linux_amd64/acli";
+      sha256 = "16da9fm7fp43ixhx5vja53cisxdv110sxgzyg73x1flyrx7j242g";
+    };
+    dontUnpack = true;
+    installPhase = ''
+      mkdir -p $out/bin
+      cp $src $out/bin/acli
+      chmod +x $out/bin/acli
+    '';
+  };
+in
 {
   home.username = "ryanr";
   home.homeDirectory = "/home/ryanr";
@@ -22,7 +38,7 @@
     m4
 
     gh
-    jira-cli-go
+    acli
     direnv
 
     nodejs_22
