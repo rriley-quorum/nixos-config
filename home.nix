@@ -14,6 +14,21 @@ let
       chmod +x $out/bin/acli
     '';
   };
+
+  ksm = pkgs.stdenv.mkDerivation rec {
+    pname = "keeper-secrets-manager-cli";
+    version = "1.2.0";
+    src = pkgs.fetchurl {
+      url = "https://github.com/Keeper-Security/secrets-manager/releases/download/ksm-cli-${version}/keeper-secrets-manager-cli-linux-${version}.tar.gz";
+      sha256 = "5d7738729af6f09fadc330945d198cba98e66b33c7ca8acd96d981be4fb16e69";
+    };
+    sourceRoot = ".";
+    installPhase = ''
+      mkdir -p $out/bin
+      cp ksm $out/bin/ksm
+      chmod +x $out/bin/ksm
+    '';
+  };
 in
 {
   home.username = "ryanr";
@@ -39,6 +54,7 @@ in
 
     gh
     acli
+    ksm
     direnv
 
     nodejs_22
@@ -68,6 +84,10 @@ in
     jdk21
 
     beam26Packages.elixir
+    beam26Packages.elixir-ls
+    erlang-language-platform
+    omnisharp-roslyn
+    terraform-ls
   ];
 
   programs.git = {
