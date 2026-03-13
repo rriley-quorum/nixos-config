@@ -56,6 +56,7 @@ in
     acli
     ksm
     direnv
+    (azure-cli.withExtensions [ azure-cli-extensions.azure-devops ])
 
     nodejs_22
     nodePackages.typescript
