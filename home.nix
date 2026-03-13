@@ -81,6 +81,7 @@ in
     chromedriver
 
     dotnet-sdk_10
+    powershell
 
     jdk21
 
