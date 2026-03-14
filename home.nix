@@ -80,7 +80,13 @@ in
     chromium
     chromedriver
 
-    dotnet-sdk_10
+    (with dotnetCorePackages; combinePackages [
+      sdk_8_0
+      sdk_9_0
+      sdk_10_0
+    ])
+    fsautocomplete
+    fantomas
     powershell
 
     jdk21
