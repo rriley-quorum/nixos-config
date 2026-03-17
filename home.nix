@@ -45,6 +45,7 @@ let
         '';
         preBuild = ''
           goVer="$(go env GOVERSION | sed 's/^go//')"
+          chmod -R u+w vendor/
           sed -i "s|## explicit; go [0-9][0-9.]*|## explicit; go $goVer|g" vendor/modules.txt
         '';
         nativeBuildInputs = [ pkgs.git ];
