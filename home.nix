@@ -180,7 +180,7 @@ in
     '';
 
     initContent = ''
-      eval "$(keychain --eval --quiet --agents ssh ~/.ssh/id_ed25519)"
+      eval "$(keychain --eval --quiet ~/.ssh/id_ed25519)"
 
       eval "$(direnv hook zsh)"
 
