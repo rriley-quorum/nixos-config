@@ -131,6 +131,15 @@ in
 
     dolt
     beadsPkg
+
+    sqlite
+    mycli
+
+    jq
+    yq
+    httpie
+    mkcert
+    watchexec
   ];
 
   programs.git = {
