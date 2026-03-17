@@ -42,6 +42,9 @@ let
         postPatch = ''
           goVer="$(go env GOVERSION | sed 's/^go//')"
           go mod edit -go="$goVer"
+        '';
+        preBuild = ''
+          goVer="$(go env GOVERSION | sed 's/^go//')"
           sed -i "s|## explicit; go [0-9][0-9.]*|## explicit; go $goVer|g" vendor/modules.txt
         '';
         nativeBuildInputs = [ pkgs.git ];
