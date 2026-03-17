@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, beads, ... }:
 let
   acli = pkgs.stdenv.mkDerivation rec {
     pname = "acli";
@@ -98,6 +98,9 @@ in
     terraform-ls
 
     postgresql
+
+    dolt
+    beads.packages.x86_64-linux.default
   ];
 
   programs.git = {

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, beads, ... }:
 {
   wsl = {
     enable = true;
@@ -44,6 +44,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    extraSpecialArgs = { inherit beads; };
     users.ryanr = import ./home.nix;
   };
 
