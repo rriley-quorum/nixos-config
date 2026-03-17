@@ -136,6 +136,8 @@ in
     dolt
     beadsPkg
 
+    keychain
+
     sqlite
     mycli
 
@@ -178,6 +180,8 @@ in
     '';
 
     initContent = ''
+      eval "$(keychain --eval --quiet --agents ssh ~/.ssh/id_ed25519)"
+
       eval "$(direnv hook zsh)"
 
       export CPPFLAGS="$(pkg-config --cflags openssl 2>/dev/null) $CPPFLAGS"
