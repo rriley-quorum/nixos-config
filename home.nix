@@ -29,6 +29,36 @@ let
       chmod +x $out/bin/ksm
     '';
   };
+
+  beadsPkg =
+    let
+      bdBase = pkgs.buildGoModule {
+        pname = "beads";
+        version = "0.61.0";
+        src = beads;
+        subPackages = [ "cmd/bd" ];
+        doCheck = false;
+        vendorHash = "sha256-Dre32o9CRnBhHjfnJD7SDwLA6b3zWJa1eFowf+nikO8=";
+        postPatch = ''
+          goVer="$(go env GOVERSION | sed 's/^go//')"
+          go mod edit -go="$goVer"
+        '';
+        env.GOTOOLCHAIN = "auto";
+        nativeBuildInputs = [ pkgs.git ];
+      };
+    in
+    pkgs.stdenv.mkDerivation {
+      pname = "beads";
+      version = bdBase.version;
+      phases = [ "installPhase" ];
+      installPhase = ''
+        mkdir -p $out/bin
+        cp ${bdBase}/bin/bd $out/bin/bd
+        ln -s bd $out/bin/beads
+        mkdir -p $out/share/zsh/site-functions
+        $out/bin/bd completion zsh > $out/share/zsh/site-functions/_bd
+      '';
+    };
 in
 {
   home.username = "ryanr";
@@ -100,7 +130,7 @@ in
     postgresql
 
     dolt
-    beads.packages.x86_64-linux.default
+    beadsPkg
   ];
 
   programs.git = {
