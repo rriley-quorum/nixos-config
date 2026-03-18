@@ -173,6 +173,7 @@ in
     shellAliases = {
       pbcopy = "xclip -selection clipboard";
       pbpaste = "xclip -selection clipboard -o";
+      nrs = "sudo nixos-rebuild switch --flake /home/ryanr/nix-config#nixos";
     };
 
     envExtra = ''
