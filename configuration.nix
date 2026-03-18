@@ -7,7 +7,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    download-buffer-size = 524288000; # 500 MiB
+  };
 
   security.sudo.wheelNeedsPassword = false;
 
