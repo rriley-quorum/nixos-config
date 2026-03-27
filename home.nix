@@ -119,6 +119,8 @@ in
     plantuml
     graphviz
 
+    icu
+
     (with dotnetCorePackages; combinePackages [
       sdk_8_0
       sdk_9_0
@@ -190,6 +192,8 @@ in
       eval "$(keychain --eval --quiet ~/.ssh/id_ed25519)"
 
       eval "$(direnv hook zsh)"
+
+      export LD_LIBRARY_PATH="${pkgs.icu}/lib:$LD_LIBRARY_PATH"
 
       export CPPFLAGS="$(pkg-config --cflags openssl 2>/dev/null) $CPPFLAGS"
       export LDFLAGS="$(pkg-config --libs openssl 2>/dev/null) $LDFLAGS"
