@@ -268,5 +268,22 @@ in
     '';
   };
 
+  systemd.user.services.cleanup = {
+    Unit.Description = "Run daily cleanup script";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "/home/ryanr/Code/scripts/cleanup.sh";
+    };
+  };
+
+  systemd.user.timers.cleanup = {
+    Unit.Description = "Daily cleanup timer";
+    Timer = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+
   programs.home-manager.enable = true;
 }
