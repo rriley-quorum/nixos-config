@@ -38,19 +38,14 @@ let
         src = beads;
         subPackages = [ "cmd/bd" ];
         doCheck = false;
-        vendorHash = "sha256-Dre32o9CRnBhHjfnJD7SDwLA6b3zWJa1eFowf+nikO8=";
+        vendorHash = "sha256-UCODmlavmZc2/4ltA2g71UvjjNLxEG+g82IFUjNtpdI=";
         postPatch = ''
+          rm -rf vendor
           goVer="$(go env GOVERSION | sed 's/^go//')"
           go mod edit -go="$goVer"
         '';
-        preBuild = ''
-          if [ -d vendor ]; then
-            goVer="$(go env GOVERSION | sed 's/^go//')"
-            chmod -R u+w vendor/
-            sed -i "s|## explicit; go [0-9][0-9.]*|## explicit; go $goVer|g" vendor/modules.txt
-          fi
-        '';
-        nativeBuildInputs = [ pkgs.git ];
+        buildInputs = [ pkgs.icu ];
+        nativeBuildInputs = [ pkgs.git pkgs.pkg-config ];
       };
     in
     pkgs.stdenv.mkDerivation {
@@ -113,7 +108,6 @@ in
 
     docker
 
-    chromium
     chromedriver
 
     plantuml
@@ -213,6 +207,13 @@ in
   xdg.configFile."nvim/lua".source = ./nvim/lua;
   xdg.configFile."nvim/lazyvim.json".source = ./nvim/lazyvim.json;
   xdg.configFile."nvim/stylua.toml".source = ./nvim/stylua.toml;
+
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      { id = "fcoeoabgfenejglbffodgkkbkcdhcgfn"; } # Claude in Chrome
+    ];
+  };
 
   programs.direnv = {
     enable = true;
