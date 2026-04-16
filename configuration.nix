@@ -7,6 +7,23 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (pyfinal: pyprev: {
+          msal = pyprev.msal.overridePythonAttrs (old: rec {
+            version = "1.34.0";
+            src = final.fetchPypi {
+              pname = "msal";
+              inherit version;
+              hash = "sha256-drqDtxbqWm11sCecCsNToOBbggyh9mgsDrf0UZDEPC8=";
+            };
+          });
+        })
+      ];
+    })
+  ];
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     download-buffer-size = 524288000; # 500 MiB
