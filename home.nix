@@ -59,6 +59,9 @@ in
     direnv
     (azure-cli.withExtensions [ azure-cli-extensions.azure-devops azure-cli-extensions.containerapp ])
 
+    pkgs.dejavu_fonts
+    pkgs.jetbrains-mono
+
     nodejs_22
     nodePackages.typescript
     nodePackages.typescript-language-server
