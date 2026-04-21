@@ -1,4 +1,4 @@
-{ config, pkgs, beads, ... }:
+{ config, pkgs, ... }:
 let
   acli = pkgs.stdenv.mkDerivation rec {
     pname = "acli";
@@ -30,36 +30,6 @@ let
     '';
   };
 
-  beadsPkg =
-    let
-      bdBase = pkgs.buildGoModule {
-        pname = "beads";
-        version = "0.61.0";
-        src = beads;
-        subPackages = [ "cmd/bd" ];
-        doCheck = false;
-        vendorHash = "sha256-UCODmlavmZc2/4ltA2g71UvjjNLxEG+g82IFUjNtpdI=";
-        postPatch = ''
-          rm -rf vendor
-          goVer="$(go env GOVERSION | sed 's/^go//')"
-          go mod edit -go="$goVer"
-        '';
-        buildInputs = [ pkgs.icu ];
-        nativeBuildInputs = [ pkgs.git pkgs.pkg-config ];
-      };
-    in
-    pkgs.stdenv.mkDerivation {
-      pname = "beads";
-      version = bdBase.version;
-      phases = [ "installPhase" ];
-      installPhase = ''
-        mkdir -p $out/bin
-        cp ${bdBase}/bin/bd $out/bin/bd
-        ln -s bd $out/bin/beads
-        mkdir -p $out/share/zsh/site-functions
-        $out/bin/bd completion zsh > $out/share/zsh/site-functions/_bd
-      '';
-    };
 in
 {
   home.username = "ryanr";
@@ -112,6 +82,9 @@ in
 
     plantuml
     graphviz
+    asciinema
+    asciinema-agg
+    ffmpeg
 
     icu
 
@@ -135,7 +108,6 @@ in
     postgresql
 
     dolt
-    beadsPkg
 
     keychain
     wslu

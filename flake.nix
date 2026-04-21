@@ -12,17 +12,11 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    beads = {
-      url = "github:steveyegge/beads";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, beads, ... }: {
+  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit beads; };
       modules = [
         nixos-wsl.nixosModules.wsl
         home-manager.nixosModules.home-manager
