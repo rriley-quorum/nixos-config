@@ -170,7 +170,7 @@ in
 
     initContent = ''
       claude-local() {
-        local model="qwen/qwen3-coder-30b"
+        local model="qwen/qwen2.5-coder-14b"
         local args=()
         while [[ $# -gt 0 ]]; do
           if [[ $1 == --model ]]; then
