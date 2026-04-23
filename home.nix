@@ -30,6 +30,12 @@ let
     '';
   };
 
+  clang18 = pkgs.runCommand "clang-18-compiler" { } ''
+    mkdir -p $out/bin
+    ln -s ${pkgs.clang_18}/bin/clang $out/bin/clang
+    ln -s ${pkgs.clang_18}/bin/clang++ $out/bin/clang++
+  '';
+
 in
 {
   home.username = "ryanr";
@@ -52,6 +58,9 @@ in
     lld
     autoconf
     m4
+    cmake
+    clang18
+    ninja
 
     gh
     acli
@@ -151,13 +160,30 @@ in
       pbcopy = "xclip -selection clipboard";
       pbpaste = "xclip -selection clipboard -o";
       rebuild = "sudo nixos-rebuild switch --flake /home/ryanr/nix-config#nixos";
+      lm-models = "curl -s $LM_API/v1/models | jq '.data[].id'";
     };
 
     envExtra = ''
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+      export LM_API="http://100.96.10.15:1234"
     '';
 
     initContent = ''
+      claude-local() {
+        local model="qwen/qwen3-coder-30b"
+        local args=()
+        while [[ $# -gt 0 ]]; do
+          if [[ $1 == --model ]]; then
+            model="$2"; shift 2
+          else
+            args+=("$1"); shift
+          fi
+        done
+        ANTHROPIC_BASE_URL=http://100.96.10.15:1234 \
+        ANTHROPIC_AUTH_TOKEN=lmstudio \
+        claude --model "$model" "''${args[@]}"
+      }
+
       eval "$(keychain --eval --quiet ~/.ssh/id_ed25519)"
 
       eval "$(direnv hook zsh)"
