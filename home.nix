@@ -160,6 +160,7 @@ in
       pbcopy = "xclip -selection clipboard";
       pbpaste = "xclip -selection clipboard -o";
       rebuild = "sudo nixos-rebuild switch --flake /home/ryanr/nix-config#nixos";
+      lm-models = "curl -s $LM_API/v1/models | jq '.data[].id'";
     };
 
     envExtra = ''
