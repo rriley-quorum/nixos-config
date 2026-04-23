@@ -169,9 +169,18 @@ in
 
     initContent = ''
       claude-local() {
+        local model="qwen/qwen3-coder-30b"
+        local args=()
+        while [[ $# -gt 0 ]]; do
+          if [[ $1 == --model ]]; then
+            model="$2"; shift 2
+          else
+            args+=("$1"); shift
+          fi
+        done
         ANTHROPIC_BASE_URL=http://100.96.10.15:1234 \
         ANTHROPIC_AUTH_TOKEN=lmstudio \
-        claude "$@"
+        claude --model "$model" "''${args[@]}"
       }
 
       eval "$(keychain --eval --quiet ~/.ssh/id_ed25519)"
