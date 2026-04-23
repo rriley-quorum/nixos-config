@@ -30,6 +30,12 @@ let
     '';
   };
 
+  clang18 = pkgs.runCommand "clang-18-compiler" { } ''
+    mkdir -p $out/bin
+    ln -s ${pkgs.clang_18}/bin/clang $out/bin/clang
+    ln -s ${pkgs.clang_18}/bin/clang++ $out/bin/clang++
+  '';
+
 in
 {
   home.username = "ryanr";
@@ -52,6 +58,9 @@ in
     lld
     autoconf
     m4
+    cmake
+    clang18
+    ninja
 
     gh
     acli
@@ -155,9 +164,16 @@ in
 
     envExtra = ''
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+      export LM_API="http://100.96.10.15:1234"
     '';
 
     initContent = ''
+      claude-local() {
+        ANTHROPIC_BASE_URL=http://100.96.10.15:1234 \
+        ANTHROPIC_AUTH_TOKEN=lmstudio \
+        claude "$@"
+      }
+
       eval "$(keychain --eval --quiet ~/.ssh/id_ed25519)"
 
       eval "$(direnv hook zsh)"
