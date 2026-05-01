@@ -68,4 +68,7 @@
   };
 
   system.stateVersion = "25.11";
+
+  # CVE-2026-31431
+  boot.blacklistedKernelModules = [ "algif_aead" ];
 }
