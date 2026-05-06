@@ -166,6 +166,9 @@ in
     envExtra = ''
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
       export LM_API="http://100.96.10.15:1234"
+      export KSM_INI_FILE="$HOME/.config/ksm/keeper.ini"
+      export GITHUB_TOKEN="$(KSM_INI_FILE="$HOME/.config/ksm/keeper.ini" ksm secret notation "keeper://2ag9hZg3HrrpnvWcADQXow/custom_field/Claude Code PAT" 2>/dev/null)"
+      export GITHUB_PERSONAL_ACCESS_TOKEN="$GITHUB_TOKEN"
     '';
 
     initContent = ''
