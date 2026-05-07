@@ -169,6 +169,7 @@ in
       export KSM_INI_FILE="$HOME/.config/ksm/keeper.ini"
       export GITHUB_TOKEN="$(KSM_INI_FILE="$HOME/.config/ksm/keeper.ini" ksm secret notation "keeper://2ag9hZg3HrrpnvWcADQXow/custom_field/Claude Code PAT" 2>/dev/null)"
       export GITHUB_PERSONAL_ACCESS_TOKEN="$GITHUB_TOKEN"
+      export AZURE_DEVOPS_PAT="$(KSM_INI_FILE="$HOME/.config/ksm/keeper.ini" ksm secret notation "keeper://9lRerqOQjvDosK3_laH15g/field/password" 2>/dev/null)"
     '';
 
     initContent = ''
