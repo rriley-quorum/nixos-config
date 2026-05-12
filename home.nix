@@ -34,14 +34,16 @@ let
     pname = "copilot-cli";
     version = "1.0.45";
     src = pkgs.fetchurl {
-      url = "https://github.com/github/copilot-cli/releases/download/v${version}/copilot-linux-x64.tar.gz";
-      sha256 = "sha256-+T2HLeFe3VEzpvjeXnLkYTExh8OiPTmW5khiRAo5eKg=";
+      url = "https://registry.npmjs.org/@github/copilot/-/copilot-${version}.tgz";
+      hash = "sha512-2QADgQcw/d0GFqTq2+nHwX152ZRvZxW0CHONG5d1RCs6YJtdr/GdbnMYYeRH2BiBIhnfkcvF50ImCRvsS5Tnwg==";
     };
-    sourceRoot = ".";
+    sourceRoot = "package";
+    nativeBuildInputs = [ pkgs.makeWrapper ];
     installPhase = ''
-      mkdir -p $out/bin
-      cp copilot $out/bin/copilot
-      chmod +x $out/bin/copilot
+      mkdir -p $out/lib/copilot-cli $out/bin
+      cp -r . $out/lib/copilot-cli/
+      makeWrapper ${pkgs.nodejs_24}/bin/node $out/bin/copilot \
+        --add-flags "$out/lib/copilot-cli/npm-loader.js"
     '';
   };
 
@@ -86,7 +88,7 @@ in
     pkgs.dejavu_fonts
     pkgs.jetbrains-mono
 
-    nodejs_22
+    nodejs_24
     nodePackages.typescript
     nodePackages.typescript-language-server
     claude-code
@@ -299,23 +301,6 @@ in
 
   systemd.user.timers.cleanup = {
     Unit.Description = "Daily cleanup timer";
-    Timer = {
-      OnCalendar = "daily";
-      Persistent = true;
-    };
-    Install.WantedBy = [ "timers.target" ];
-  };
-
-  systemd.user.services.update-system = {
-    Unit.Description = "Update flake and copilot-cli";
-    Service = {
-      Type = "oneshot";
-      ExecStart = "/home/ryanr/nix-config/update-system.sh";
-    };
-  };
-
-  systemd.user.timers.update-system = {
-    Unit.Description = "Daily system update timer";
     Timer = {
       OnCalendar = "daily";
       Persistent = true;
