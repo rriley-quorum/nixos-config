@@ -30,6 +30,21 @@ let
     '';
   };
 
+  copilot-cli = pkgs.stdenv.mkDerivation rec {
+    pname = "copilot-cli";
+    version = "1.0.45";
+    src = pkgs.fetchurl {
+      url = "https://github.com/github/copilot-cli/releases/download/v${version}/copilot-linux-x64.tar.gz";
+      sha256 = "sha256-+T2HLeFe3VEzpvjeXnLkYTExh8OiPTmW5khiRAo5eKg=";
+    };
+    sourceRoot = ".";
+    installPhase = ''
+      mkdir -p $out/bin
+      cp copilot $out/bin/copilot
+      chmod +x $out/bin/copilot
+    '';
+  };
+
   clang18 = pkgs.runCommand "clang-18-compiler" { } ''
     mkdir -p $out/bin
     ln -s ${pkgs.clang_18}/bin/clang $out/bin/clang
@@ -75,7 +90,7 @@ in
     nodePackages.typescript
     nodePackages.typescript-language-server
     claude-code
-    github-copilot-cli
+    copilot-cli
 
     ruby_4_0
 
@@ -284,6 +299,23 @@ in
 
   systemd.user.timers.cleanup = {
     Unit.Description = "Daily cleanup timer";
+    Timer = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+
+  systemd.user.services.update-system = {
+    Unit.Description = "Update flake and copilot-cli";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "/home/ryanr/nix-config/update-system.sh";
+    };
+  };
+
+  systemd.user.timers.update-system = {
+    Unit.Description = "Daily system update timer";
     Timer = {
       OnCalendar = "daily";
       Persistent = true;
