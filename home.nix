@@ -61,6 +61,11 @@ in
 
   home.sessionPath = [ "$HOME/.local/bin" "$HOME/.dotnet/tools" ];
 
+  home.sessionVariables = {
+    PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+  };
+
   home.packages = with pkgs; [
     wget
     dos2unix
@@ -108,6 +113,7 @@ in
     docker
 
     chromedriver
+    playwright-driver.browsers
 
     plantuml
     graphviz
