@@ -32,10 +32,10 @@ let
 
   copilot-cli = pkgs.stdenv.mkDerivation rec {
     pname = "copilot-cli";
-    version = "1.0.54";
+    version = "1.0.60";
     src = pkgs.fetchurl {
       url = "https://registry.npmjs.org/@github/copilot/-/copilot-${version}.tgz";
-      hash = "sha512-gxiWEQFWxJ3J2Rh67CxKEfER/zayB1z2qaSBUz3RZ0u1iDNJdGPry/1vOQ72X/yHmpGNm+9egucN5VMzyedsIg==";
+      hash = "sha512-+GjW+GJNo55nwJwt48o9szWcyhuY0u682cBKQI1ay9jVBX8DCCXC6HB6Tyv5/MaM4N7CxTiEgp48aVMkye8K+g==";
     };
     sourceRoot = "package";
     nativeBuildInputs = [ pkgs.makeWrapper ];
@@ -43,7 +43,7 @@ let
       mkdir -p $out/lib/copilot-cli $out/bin
       cp -r . $out/lib/copilot-cli/
       substituteInPlace $out/lib/copilot-cli/npm-loader.js \
-        --replace-fail 'import{isNonGlibcLinuxSync as i}from"detect-libc";' 'const i=()=>false;'
+        --replace-fail 'import{isNonGlibcLinuxSync as s}from"detect-libc";' 'const s=()=>false;'
       makeWrapper ${pkgs.nodejs_24}/bin/node $out/bin/copilot \
         --add-flags "$out/lib/copilot-cli/npm-loader.js" \
         --set SSL_CERT_FILE "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" \
@@ -114,7 +114,7 @@ in
 
     luarocks
 
-    docker
+    docker_29
 
     chromedriver
     playwright-driver.browsers

@@ -38,6 +38,7 @@
   };
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.package = pkgs.docker_29;
 
   system.activationScripts.dockerDesktopCompat = ''
     mkdir -p /usr/bin
