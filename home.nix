@@ -68,6 +68,9 @@ in
   home.sessionVariables = {
     PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
     PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+    WORKER_API_KEY = "lm-studio";
+    WORKER_BASE_URL = "https://100.96.10.15:1234:1234/v1";
+    WORKER_MODEL = "google/gemma-4-26b-a4b-qat";
   };
 
   home.packages = with pkgs; [
