@@ -45,7 +45,12 @@
     ln -sf /run/current-system/sw/bin/whoami /usr/bin/whoami
   '';
 
-  programs.nix-ld.enable = true;
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+    ];
+  };
 
   programs.zsh.enable = true;
 
