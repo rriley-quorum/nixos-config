@@ -32,10 +32,10 @@ let
 
   copilot-cli = pkgs.stdenv.mkDerivation rec {
     pname = "copilot-cli";
-    version = "1.0.61";
+    version = "1.0.63";
     src = pkgs.fetchurl {
       url = "https://registry.npmjs.org/@github/copilot/-/copilot-${version}.tgz";
-      hash = "sha512-E4f7YXTL2uUZY/ypnfsUruAeSgrHx3AGYEbm5N0DrpzPqoNAZqV6kHEWM4vu+W/nGvydIfPxmOTqaMEhM8r0Uw==";
+      hash = "sha512-e8DRYiWJQc4kepVXsXjC8vpDU2FXS/TfR+Z6p/KAojfcwIUZzKMAfCV5D1lD25hV4CryVH1Z9t7mHqChickj0Q==";
     };
     sourceRoot = "package";
     nativeBuildInputs = [ pkgs.makeWrapper ];
