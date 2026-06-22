@@ -222,7 +222,7 @@ in
 
       eval "$(direnv hook zsh)"
 
-      export LD_LIBRARY_PATH="/nix/store/spfvb27ymwm5c94cpj00r1q5g1bdj8s8-ld-library-path/share/nix-ld/lib:${pkgs.icu}/lib:$LD_LIBRARY_PATH"
+      export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH:${pkgs.icu}/lib:$LD_LIBRARY_PATH"
 
       export CPPFLAGS="$(pkg-config --cflags openssl 2>/dev/null) $CPPFLAGS"
       export LDFLAGS="$(pkg-config --libs openssl 2>/dev/null) $LDFLAGS"
