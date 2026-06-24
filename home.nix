@@ -162,6 +162,7 @@ in
     httpie
     mkcert
     watchexec
+    openssl
   ];
 
   programs.git = {
