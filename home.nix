@@ -32,10 +32,10 @@ let
 
   copilot-cli = pkgs.stdenv.mkDerivation rec {
     pname = "copilot-cli";
-    version = "1.0.63";
+    version = "1.0.68";
     src = pkgs.fetchurl {
       url = "https://registry.npmjs.org/@github/copilot/-/copilot-${version}.tgz";
-      hash = "sha512-e8DRYiWJQc4kepVXsXjC8vpDU2FXS/TfR+Z6p/KAojfcwIUZzKMAfCV5D1lD25hV4CryVH1Z9t7mHqChickj0Q==";
+      hash = "sha512-2VPcTlW0RAEsfeS0Ma2ICCkfXgpxy3NL7+SReR8gzvEEPiokSRf0k5JBPlgMbBEFvocSRcJ01S8KvBm84Dw+Fw==";
     };
     sourceRoot = "package";
     nativeBuildInputs = [ pkgs.makeWrapper ];
@@ -43,7 +43,7 @@ let
       mkdir -p $out/lib/copilot-cli $out/bin
       cp -r . $out/lib/copilot-cli/
       substituteInPlace $out/lib/copilot-cli/npm-loader.js \
-        --replace-fail 'import{isNonGlibcLinuxSync as s}from"detect-libc";' 'const s=()=>false;'
+        --replace-fail 'import{isNonGlibcLinuxSync as e}from"detect-libc";' 'const e=()=>false;'
       makeWrapper ${pkgs.nodejs_24}/bin/node $out/bin/copilot \
         --add-flags "$out/lib/copilot-cli/npm-loader.js" \
         --set SSL_CERT_FILE "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" \
