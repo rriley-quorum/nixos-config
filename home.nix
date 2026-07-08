@@ -163,6 +163,7 @@ in
     mkcert
     watchexec
     openssl
+    unixODBC
   ];
 
   programs.git = {

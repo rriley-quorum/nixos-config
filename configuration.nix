@@ -49,6 +49,7 @@
     enable = true;
     libraries = with pkgs; [
       stdenv.cc.cc.lib
+      unixODBC
     ];
   };
 
