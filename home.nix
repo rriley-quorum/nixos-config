@@ -95,7 +95,7 @@ in
     acli
     ksm
     direnv
-    (azure-cli.withExtensions [ azure-cli-extensions.azure-devops azure-cli-extensions.containerapp ])
+    (azure-cli.withExtensions [ azure-cli-extensions.azure-devops azure-cli-extensions.containerapp azure-cli-extensions.account ])
 
     pkgs.dejavu_fonts
     pkgs.jetbrains-mono
