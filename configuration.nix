@@ -3,7 +3,14 @@
   wsl = {
     enable = true;
     defaultUser = "ryanr";
+    # Re-register WSLInterop after systemd-binfmt clears it at boot.
+    # Without this, no Windows .exe runs (Exec format error) - breaks
+    # browser launch for az login and all other Windows interop.
+    interop.register = true;
   };
+
+  # az login (and any tool honoring $BROWSER) opens the Windows browser.
+  environment.sessionVariables.BROWSER = "wslview";
 
   nixpkgs.config.allowUnfree = true;
 
