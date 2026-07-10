@@ -145,6 +145,7 @@ in
     beam26Packages.elixir-ls
     erlang-language-platform
     omnisharp-roslyn
+    terraform
     terraform-ls
 
     postgresql
