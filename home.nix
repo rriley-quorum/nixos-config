@@ -94,6 +94,7 @@ in
     gh
     acli
     ksm
+    databricks-cli
     direnv
     (azure-cli.withExtensions [ azure-cli-extensions.azure-devops azure-cli-extensions.containerapp azure-cli-extensions.account ])
 
