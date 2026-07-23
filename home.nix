@@ -326,15 +326,5 @@ in
     Install.WantedBy = [ "timers.target" ];
   };
 
-  systemd.user.services.cloudflared-tunnel = {
-    Unit.Description = "Cloudflare quick tunnel for localhost:4001";
-    Service = {
-      ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --url http://localhost:4001 --protocol http2";
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-    Install.WantedBy = [ "default.target" ];
-  };
-
   programs.home-manager.enable = true;
 }
