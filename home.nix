@@ -95,6 +95,7 @@ in
     acli
     ksm
     databricks-cli
+    cloudflared
     direnv
     (azure-cli.withExtensions [ azure-cli-extensions.azure-devops azure-cli-extensions.containerapp azure-cli-extensions.account ])
 
