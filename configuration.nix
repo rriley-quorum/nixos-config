@@ -48,8 +48,10 @@
   virtualisation.docker.package = pkgs.docker_29;
 
   system.activationScripts.dockerDesktopCompat = ''
-    mkdir -p /usr/bin
+    mkdir -p /bin /usr/bin
     ln -sf /run/current-system/sw/bin/whoami /usr/bin/whoami
+    ln -sf ${pkgs.coreutils}/bin/install /usr/bin/install
+    ln -sf ${pkgs.coreutils}/bin/install /bin/install
   '';
 
   programs.nix-ld = {
