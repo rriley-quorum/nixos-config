@@ -50,8 +50,11 @@
   system.activationScripts.dockerDesktopCompat = ''
     mkdir -p /bin /usr/bin
     ln -sf /run/current-system/sw/bin/whoami /usr/bin/whoami
-    ln -sf ${pkgs.coreutils}/bin/install /usr/bin/install
-    ln -sf ${pkgs.coreutils}/bin/install /bin/install
+    for bin in ${pkgs.coreutils}/bin/*; do
+      name=$(basename "$bin")
+      ln -sf "$bin" "/usr/bin/$name"
+      ln -sf "$bin" "/bin/$name"
+    done
   '';
 
   programs.nix-ld = {
