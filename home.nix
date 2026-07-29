@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 let
   acli = pkgs.stdenv.mkDerivation rec {
     pname = "acli";
@@ -27,27 +27,6 @@ let
       mkdir -p $out/bin
       cp ksm $out/bin/ksm
       chmod +x $out/bin/ksm
-    '';
-  };
-
-  copilot-cli = pkgs.stdenv.mkDerivation rec {
-    pname = "copilot-cli";
-    version = "1.0.68";
-    src = pkgs.fetchurl {
-      url = "https://registry.npmjs.org/@github/copilot/-/copilot-${version}.tgz";
-      hash = "sha512-2VPcTlW0RAEsfeS0Ma2ICCkfXgpxy3NL7+SReR8gzvEEPiokSRf0k5JBPlgMbBEFvocSRcJ01S8KvBm84Dw+Fw==";
-    };
-    sourceRoot = "package";
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-    installPhase = ''
-      mkdir -p $out/lib/copilot-cli $out/bin
-      cp -r . $out/lib/copilot-cli/
-      substituteInPlace $out/lib/copilot-cli/npm-loader.js \
-        --replace-fail 'import{isNonGlibcLinuxSync as e}from"detect-libc";' 'const e=()=>false;'
-      makeWrapper ${pkgs.nodejs_24}/bin/node $out/bin/copilot \
-        --add-flags "$out/lib/copilot-cli/npm-loader.js" \
-        --set SSL_CERT_FILE "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" \
-        --set SSL_CERT_DIR "${pkgs.cacert}/etc/ssl/certs"
     '';
   };
 
@@ -81,7 +60,7 @@ in
     inotify-tools
     xclip
     lazygit
-    tree-sitter
+    pkgs-unstable.tree-sitter
 
     gcc
     lld
@@ -106,7 +85,6 @@ in
     nodePackages.typescript
     nodePackages.typescript-language-server
     claude-code
-    copilot-cli
 
     ruby_4_0
 
