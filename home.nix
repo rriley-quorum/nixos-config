@@ -180,9 +180,35 @@ in
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
       export LM_API="http://100.96.10.15:1234"
       export KSM_INI_FILE="$HOME/.config/ksm/keeper.ini"
-      export GITHUB_TOKEN="$(KSM_INI_FILE="$HOME/.config/ksm/keeper.ini" ksm secret notation "keeper://2ag9hZg3HrrpnvWcADQXow/custom_field/Claude Code PAT" 2>/dev/null)"
+    '';
+
+    # KSM-backed tokens: only fetched on login shells (not every subshell/script),
+    # and cached to disk with a TTL so repeated logins don't re-hit Keeper's API.
+    profileExtra = ''
+      _ksm_cached_secret() {
+        local cache_file="$1" ttl="$2" notation="$3"
+        if [[ -f "$cache_file" ]]; then
+          local mtime now
+          mtime=$(stat -c %Y "$cache_file" 2>/dev/null || echo 0)
+          now=$(date +%s)
+          if (( now - mtime < ttl )); then
+            cat "$cache_file"
+            return
+          fi
+        fi
+        local value
+        value="$(KSM_INI_FILE="$HOME/.config/ksm/keeper.ini" ksm secret notation "$notation" 2>/dev/null)"
+        if [[ -n "$value" ]]; then
+          mkdir -p "$(dirname "$cache_file")"
+          (umask 077 && printf '%s' "$value" > "$cache_file")
+        fi
+        printf '%s' "$value"
+      }
+
+      export GITHUB_TOKEN="$(_ksm_cached_secret "$HOME/.cache/ksm/github_token" 86400 "keeper://2ag9hZg3HrrpnvWcADQXow/custom_field/Claude Code PAT")"
       export GITHUB_PERSONAL_ACCESS_TOKEN="$GITHUB_TOKEN"
-      export AZURE_DEVOPS_PAT="$(KSM_INI_FILE="$HOME/.config/ksm/keeper.ini" ksm secret notation "keeper://9lRerqOQjvDosK3_laH15g/field/password" 2>/dev/null)"
+      export AZURE_DEVOPS_PAT="$(_ksm_cached_secret "$HOME/.cache/ksm/azure_devops_pat" 86400 "keeper://9lRerqOQjvDosK3_laH15g/field/password")"
+      unset -f _ksm_cached_secret
     '';
 
     initContent = ''
