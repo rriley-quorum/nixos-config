@@ -76,7 +76,7 @@ in
     databricks-cli
     cloudflared
     direnv
-    (azure-cli.withExtensions [ azure-cli-extensions.azure-devops azure-cli-extensions.containerapp azure-cli-extensions.account ])
+    (azure-cli.withExtensions [ azure-cli-extensions.azure-devops azure-cli-extensions.containerapp azure-cli-extensions.account azure-cli-extensions.application-insights ])
 
     pkgs.dejavu_fonts
     pkgs.jetbrains-mono
