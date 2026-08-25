@@ -36,6 +36,9 @@ let
     ln -s ${pkgs.clang_18}/bin/clang++ $out/bin/clang++
   '';
 
+  agents-shire = pkgs.callPackage ./pkgs/agents-shire { };
+  pi-coding-agent = pkgs.callPackage ./pkgs/pi-coding-agent { };
+
 in
 {
   home.username = "ryanr";
@@ -84,6 +87,9 @@ in
     nodejs_24
     nodePackages.typescript
     nodePackages.typescript-language-server
+    pnpm
+    agents-shire
+    pi-coding-agent
     # claude-code
 
     ruby_4_0
