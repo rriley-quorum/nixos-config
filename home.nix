@@ -38,6 +38,7 @@ let
 
   agents-shire = pkgs.callPackage ./pkgs/agents-shire { };
   pi-coding-agent = pkgs.callPackage ./pkgs/pi-coding-agent { };
+  beads = pkgs.callPackage ./pkgs/beads { };
 
 in
 {
@@ -90,6 +91,7 @@ in
     pnpm
     agents-shire
     pi-coding-agent
+    beads
     # claude-code
 
     ruby_4_0
