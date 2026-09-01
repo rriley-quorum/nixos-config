@@ -153,6 +153,7 @@ in
     watchexec
     openssl
     unixODBC
+    poppler_utils
   ];
 
   programs.git = {
