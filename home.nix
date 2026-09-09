@@ -75,6 +75,7 @@ in
     ninja
 
     gh
+    github-copilot-cli
     acli
     ksm
     databricks-cli
