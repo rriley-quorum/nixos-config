@@ -75,6 +75,7 @@
       stdenv.cc.cc.lib
       unixODBC
       libsecret
+      glib
     ];
   };
 
