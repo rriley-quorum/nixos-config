@@ -216,7 +216,6 @@ in
 
       export GITHUB_TOKEN="$(_ksm_cached_secret "$HOME/.cache/ksm/github_token" 86400 "keeper://2ag9hZg3HrrpnvWcADQXow/custom_field/Claude Code PAT")"
       export GITHUB_PERSONAL_ACCESS_TOKEN="$GITHUB_TOKEN"
-      export AZURE_DEVOPS_PAT="$(_ksm_cached_secret "$HOME/.cache/ksm/azure_devops_pat" 86400 "keeper://9lRerqOQjvDosK3_laH15g/field/password")"
       unset -f _ksm_cached_secret
     '';
 
