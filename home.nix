@@ -116,6 +116,7 @@ in
     asciinema
     asciinema-agg
     ffmpeg
+    libreoffice-fresh
 
     icu
 
