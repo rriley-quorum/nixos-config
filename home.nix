@@ -54,6 +54,12 @@ in
     WORKER_API_KEY = "lm-studio";
     WORKER_BASE_URL = "https://100.96.10.15:1234:1234/v1";
     WORKER_MODEL = "google/gemma-4-26b-a4b-qat";
+    # Windows checkouts under /mnt/c are shared with the Windows-side Elixir
+    # build. NIF-based deps (mdex_native, lazy_html) compile OS-specific
+    # binaries, so WSL2 needs its own _build/deps trees to avoid loading
+    # windows-msvc artifacts on Linux.
+    MIX_BUILD_PATH = "_build-wsl";
+    MIX_DEPS_PATH = "deps-wsl";
   };
 
   home.packages = with pkgs; [
