@@ -131,8 +131,8 @@ in
 
     jdk21
 
-    beam26Packages.elixir
-    beam26Packages.elixir-ls
+    pkgs-unstable.beam29Packages.elixir_1_20
+    pkgs-unstable.beam29Packages.elixir-ls
     erlang-language-platform
     omnisharp-roslyn
     terraform
