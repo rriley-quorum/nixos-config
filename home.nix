@@ -104,7 +104,7 @@ in
     ruby_4_0
 
     uv
-    python312
+    (python312.withPackages (ps: [ ps.pyyaml ]))
 
     rustup
 

@@ -69,6 +69,19 @@
     done
   '';
 
+  # Non-interactive, non-login shells (bash -c, `wsl.exe -e`) never source
+  # .bashrc/.profile, so neither /run/current-system/sw/bin (systemPackages)
+  # nor home-manager's per-user profile reach their PATH. /usr/local/bin is
+  # on the bare WSL PATH regardless of shell type, so mirror both there.
+  system.activationScripts.usrLocalBinCompat = ''
+    mkdir -p /usr/local/bin
+    for bin in /run/current-system/sw/bin/*; do
+      ln -sf "$bin" "/usr/local/bin/$(basename "$bin")"
+    done
+    # home-manager package, not a systemPackage — link explicitly.
+    ln -sf ${pkgs.python312.withPackages (ps: [ ps.pyyaml ])}/bin/python3 /usr/local/bin/python3
+  '';
+
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
