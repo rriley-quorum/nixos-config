@@ -224,6 +224,8 @@ in
 
       export GITHUB_TOKEN="$(_ksm_cached_secret "$HOME/.cache/ksm/github_token" 86400 "keeper://2ag9hZg3HrrpnvWcADQXow/custom_field/Claude Code PAT")"
       export GITHUB_PERSONAL_ACCESS_TOKEN="$GITHUB_TOKEN"
+      export VERACODE_API_KEY_ID="$(_ksm_cached_secret "$HOME/.cache/ksm/veracode_api_key_id" 86400 "keeper://i7qH2mB1K1Ao70za-yemBw/field/login")"
+      export VERACODE_API_KEY_SECRET="$(_ksm_cached_secret "$HOME/.cache/ksm/veracode_api_key_secret" 86400 "keeper://i7qH2mB1K1Ao70za-yemBw/field/password")"
       unset -f _ksm_cached_secret
     '';
 
